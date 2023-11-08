@@ -1,7 +1,7 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: package-template
+  APP_NAME: xattr
   MACOSX_DEPLOYMENT_TARGET: '10.13'
 'on':
   push:
@@ -30,14 +30,6 @@ jobs:
             build: |
               yarn build
               strip -x *.node
-          - host: windows-latest
-            build: yarn build
-            target: x86_64-pc-windows-msvc
-          - host: windows-latest
-            build: |
-              yarn build --target i686-pc-windows-msvc
-              yarn test
-            target: i686-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
@@ -92,9 +84,6 @@ jobs:
               rustup target add aarch64-unknown-linux-musl &&
               yarn build --target aarch64-unknown-linux-musl &&
               /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node
-          - host: windows-latest
-            target: aarch64-pc-windows-msvc
-            build: yarn build --target aarch64-pc-windows-msvc
     name: stable - ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
@@ -175,7 +164,7 @@ jobs:
           version: '13.2'
           memory: 13G
           cpu_count: 3
-          environment_variables: 'DEBUG RUSTUP_IO_THREADS'
+          environment_variables: DEBUG RUSTUP_IO_THREADS
           shell: bash
           run: |
             sudo pkg install -y -f curl node libnghttp2 npm
@@ -213,8 +202,6 @@ jobs:
       fail-fast: false
       matrix:
         settings:
-          - host: windows-latest
-            target: x86_64-pc-windows-msvc
           - host: macos-latest
             target: x86_64-apple-darwin
         node:
