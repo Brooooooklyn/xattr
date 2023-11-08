@@ -11,3 +11,12 @@ export function removeAttributeSync(path: string, name: string): void
 export function removeAttribute(path: string, name: string): Promise<void>
 export function listAttributes(path: string): Promise<Array<string>>
 export function listAttributesSync(path: string): Array<string>
+
+export function get(path: string, name: string): Promise<Buffer | null>
+export function getSync(path: string, name: string): Buffer | null
+export function set(path: string, name: string, value: Buffer | string): Promise<void>
+export function setSync(path: string, name: string, value: Buffer | string): void
+export function removeSync(path: string, name: string): void
+export function remove(path: string, name: string): Promise<void>
+export function list(path: string): Promise<Array<string>>
+export function listSync(path: string): Array<string>
