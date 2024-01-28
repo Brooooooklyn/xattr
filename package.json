@@ -70,7 +70,7 @@
     "fs-temp": "^2.0.1",
     "husky": "^9.0.0",
     "lint-staged": "^15.0.2",
-    "npm-run-all": "^4.1.5",
+    "npm-run-all2": "^5.0.0",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
