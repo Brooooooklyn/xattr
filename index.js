@@ -62,7 +62,9 @@ switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'xattr.win32-x64-msvc.node'))
+        localFileExisted = existsSync(
+          join(__dirname, 'xattr.win32-x64-msvc.node')
+        )
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-x64-msvc.node')
@@ -74,7 +76,9 @@ switch (platform) {
         }
         break
       case 'ia32':
-        localFileExisted = existsSync(join(__dirname, 'xattr.win32-ia32-msvc.node'))
+        localFileExisted = existsSync(
+          join(__dirname, 'xattr.win32-ia32-msvc.node')
+        )
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-ia32-msvc.node')
@@ -86,7 +90,9 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'xattr.win32-arm64-msvc.node'))
+        localFileExisted = existsSync(
+          join(__dirname, 'xattr.win32-arm64-msvc.node')
+        )
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-arm64-msvc.node')
@@ -125,7 +131,9 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'xattr.darwin-arm64.node'))
+        localFileExisted = existsSync(
+          join(__dirname, 'xattr.darwin-arm64.node')
+        )
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.darwin-arm64.node')
@@ -159,7 +167,9 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'xattr.linux-x64-musl.node'))
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-x64-musl.node')
+          )
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-x64-musl.node')
@@ -170,7 +180,9 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'xattr.linux-x64-gnu.node'))
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-x64-gnu.node')
+          )
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-x64-gnu.node')
@@ -184,7 +196,9 @@ switch (platform) {
         break
       case 'arm64':
         if (isMusl()) {
-          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm64-musl.node'))
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-arm64-musl.node')
+          )
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm64-musl.node')
@@ -195,7 +209,9 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm64-gnu.node'))
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-arm64-gnu.node')
+          )
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm64-gnu.node')
@@ -208,12 +224,72 @@ switch (platform) {
         }
         break
       case 'arm':
-        localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm-gnueabihf.node'))
+        if (isMusl()) {
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-arm-musleabihf.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./xattr.linux-arm-musleabihf.node')
+            } else {
+              nativeBinding = require('@napi-rs/xattr-linux-arm-musleabihf')
+            }
+          } catch (e) {
+            loadError = e
+          }
+        } else {
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-arm-gnueabihf.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./xattr.linux-arm-gnueabihf.node')
+            } else {
+              nativeBinding = require('@napi-rs/xattr-linux-arm-gnueabihf')
+            }
+          } catch (e) {
+            loadError = e
+          }
+        }
+        break
+      case 'riscv64':
+        if (isMusl()) {
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-riscv64-musl.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./xattr.linux-riscv64-musl.node')
+            } else {
+              nativeBinding = require('@napi-rs/xattr-linux-riscv64-musl')
+            }
+          } catch (e) {
+            loadError = e
+          }
+        } else {
+          localFileExisted = existsSync(
+            join(__dirname, 'xattr.linux-riscv64-gnu.node')
+          )
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./xattr.linux-riscv64-gnu.node')
+            } else {
+              nativeBinding = require('@napi-rs/xattr-linux-riscv64-gnu')
+            }
+          } catch (e) {
+            loadError = e
+          }
+        }
+        break
+      case 's390x':
+        localFileExisted = existsSync(
+          join(__dirname, 'xattr.linux-s390x-gnu.node')
+        )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./xattr.linux-arm-gnueabihf.node')
+            nativeBinding = require('./xattr.linux-s390x-gnu.node')
           } else {
-            nativeBinding = require('@napi-rs/xattr-linux-arm-gnueabihf')
+            nativeBinding = require('@napi-rs/xattr-linux-s390x-gnu')
           }
         } catch (e) {
           loadError = e
@@ -234,16 +310,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const {
-  getAttribute,
-  getAttributeSync,
-  setAttribute,
-  setAttributeSync,
-  removeAttributeSync,
-  removeAttribute,
-  listAttributes,
-  listAttributesSync,
-} = nativeBinding
+const { getAttribute, getAttributeSync, setAttribute, setAttributeSync, removeAttributeSync, removeAttribute, listAttributes, listAttributesSync } = nativeBinding
 
 module.exports.getAttribute = getAttribute
 module.exports.getAttributeSync = getAttributeSync
@@ -253,11 +320,3 @@ module.exports.removeAttributeSync = removeAttributeSync
 module.exports.removeAttribute = removeAttribute
 module.exports.listAttributes = listAttributes
 module.exports.listAttributesSync = listAttributesSync
-module.exports.get = getAttribute
-module.exports.getSync = getAttributeSync
-module.exports.set = setAttribute
-module.exports.setSync = setAttributeSync
-module.exports.removeSync = removeAttributeSync
-module.exports.remove = removeAttribute
-module.exports.list = listAttributes
-module.exports.listSync = listAttributesSync
