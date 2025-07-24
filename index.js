@@ -62,9 +62,7 @@ switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(
-          join(__dirname, 'xattr.win32-x64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'xattr.win32-x64-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-x64-msvc.node')
@@ -76,9 +74,7 @@ switch (platform) {
         }
         break
       case 'ia32':
-        localFileExisted = existsSync(
-          join(__dirname, 'xattr.win32-ia32-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'xattr.win32-ia32-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-ia32-msvc.node')
@@ -90,9 +86,7 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'xattr.win32-arm64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'xattr.win32-arm64-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.win32-arm64-msvc.node')
@@ -131,9 +125,7 @@ switch (platform) {
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'xattr.darwin-arm64.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'xattr.darwin-arm64.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.darwin-arm64.node')
@@ -167,9 +159,7 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-x64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-x64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-x64-musl.node')
@@ -180,9 +170,7 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-x64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-x64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-x64-gnu.node')
@@ -196,9 +184,7 @@ switch (platform) {
         break
       case 'arm64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-arm64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm64-musl.node')
@@ -209,9 +195,7 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-arm64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm64-gnu.node')
@@ -225,9 +209,7 @@ switch (platform) {
         break
       case 'arm':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-arm-musleabihf.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm-musleabihf.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm-musleabihf.node')
@@ -238,9 +220,7 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-arm-gnueabihf.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-arm-gnueabihf.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-arm-gnueabihf.node')
@@ -254,9 +234,7 @@ switch (platform) {
         break
       case 'riscv64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-riscv64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-riscv64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-riscv64-musl.node')
@@ -267,9 +245,7 @@ switch (platform) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'xattr.linux-riscv64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'xattr.linux-riscv64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./xattr.linux-riscv64-gnu.node')
@@ -282,9 +258,7 @@ switch (platform) {
         }
         break
       case 's390x':
-        localFileExisted = existsSync(
-          join(__dirname, 'xattr.linux-s390x-gnu.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'xattr.linux-s390x-gnu.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./xattr.linux-s390x-gnu.node')
@@ -310,7 +284,16 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { getAttribute, getAttributeSync, setAttribute, setAttributeSync, removeAttributeSync, removeAttribute, listAttributes, listAttributesSync } = nativeBinding
+const {
+  getAttribute,
+  getAttributeSync,
+  setAttribute,
+  setAttributeSync,
+  removeAttributeSync,
+  removeAttribute,
+  listAttributes,
+  listAttributesSync,
+} = nativeBinding
 
 module.exports.getAttribute = getAttribute
 module.exports.getAttributeSync = getAttributeSync

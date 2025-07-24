@@ -1,6 +1,6 @@
 #![deny(clippy::all)]
 
-use napi::{bindgen_prelude::*, JsBuffer};
+use napi::bindgen_prelude::*;
 use napi_derive::napi;
 
 pub struct GetAttributeTask {
@@ -74,15 +74,10 @@ pub fn set_attribute(
 }
 
 #[napi]
-pub fn set_attribute_sync(
-  path: String,
-  name: String,
-  value: Either<JsBuffer, String>,
-) -> Result<()> {
+pub fn set_attribute_sync(path: String, name: String, value: Either<&[u8], String>) -> Result<()> {
   match value {
     Either::A(buffer) => {
-      let buffer = buffer.into_value()?;
-      xattr::set(path, name, buffer.as_ref())?;
+      xattr::set(path, name, buffer)?;
     }
     Either::B(s) => {
       xattr::set(path, name, s.as_bytes())?;
@@ -135,7 +130,7 @@ impl Task for ListAttributesTask {
     xattr::list(&self.path)?
       .map(|x| {
         x.into_string()
-          .map_err(|err| Error::new(Status::InvalidArg, format!("Invalid attribute: {:?}", err)))
+          .map_err(|err| Error::new(Status::InvalidArg, format!("Invalid attribute: {err:?}")))
       })
       .collect()
   }
@@ -155,7 +150,7 @@ pub fn list_attributes_sync(path: String) -> Result<Vec<String>> {
   xattr::list(path)?
     .map(|x| {
       x.into_string()
-        .map_err(|err| Error::new(Status::InvalidArg, format!("Invalid attribute: {:?}", err)))
+        .map_err(|err| Error::new(Status::InvalidArg, format!("Invalid attribute: {err:?}")))
     })
     .collect()
 }
