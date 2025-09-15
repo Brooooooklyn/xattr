@@ -1,6 +1,6 @@
 {
   "name": "@napi-rs/xattr",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "It provides support for manipulating extended attributes (xattrs) on modern Unix filesystems.",
   "main": "index.js",
   "repository": {
