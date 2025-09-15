@@ -3,7 +3,10 @@
   "version": "1.0.2",
   "description": "It provides support for manipulating extended attributes (xattrs) on modern Unix filesystems.",
   "main": "index.js",
-  "repository": "https://github.com/Brooooooklyn/xattr.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/xattr.git"
+  },
   "license": "MIT",
   "keywords": [
     "napi-rs",
@@ -49,12 +52,13 @@
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint .",
+    "preversion": "napi build --platform && git add .",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "ava",
     "version": "napi version"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.0.3",
+    "@napi-rs/cli": "^3.2.0",
     "@oxc-node/core": "^0.0.32",
     "@taplo/cli": "^0.7.0",
     "@types/node": "^24.1.0",
