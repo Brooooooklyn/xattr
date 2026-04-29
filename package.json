@@ -84,9 +84,9 @@
     ]
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    },
+    "extensions": [
+      "ts"
+    ],
     "timeout": "2m",
     "nodeArguments": [
       "--import=@oxc-node/core/register"
