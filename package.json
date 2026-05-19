@@ -67,7 +67,7 @@
     "fs-temp": "^2.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.0",
-    "npm-run-all2": "^8.0.4",
+    "npm-run-all2": "^9.0.0",
     "oxlint": "^1.8.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.0"
