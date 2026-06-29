@@ -25,7 +25,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup node
         uses: actions/setup-node@v6
@@ -84,7 +84,7 @@ jobs:
     name: stable - ${{ matrix.settings.target }} - node@22
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup node
         uses: actions/setup-node@v6
         with:
@@ -138,7 +138,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build FreeBSD
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build
         id: build
         uses: cross-platform-actions/action@v1.1.0
@@ -199,7 +199,7 @@ jobs:
           - '24'
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup node
         uses: actions/setup-node@v6
         with:
@@ -239,7 +239,7 @@ jobs:
             node: '24'
     runs-on: ${{ contains(matrix.target, 'aarch64') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup node
         uses: actions/setup-node@v6
         with:
@@ -303,7 +303,7 @@ jobs:
       - test-macOS-binding
       - test-linux-binding
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup node
         uses: actions/setup-node@v6
         with:
